@@ -1,0 +1,1 @@
+INSERT INTO offices (description, ciudad, totalExpenses, balance, address) values('Office1', 'Leon', 200, 3000, 'Padre Isla 12');

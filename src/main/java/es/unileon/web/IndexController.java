@@ -42,7 +42,7 @@ public class IndexController {
     }
 
 
-    public void setProductManager(OfficeManager productManager) {
+    public void setOfficeManager(OfficeManager productManager) {
         this.productManager = productManager;
     }
 }

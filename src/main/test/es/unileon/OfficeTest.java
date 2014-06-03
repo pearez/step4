@@ -1,163 +1,83 @@
 package es.unileon;
 
-
-import es.unileon.domain.MalformedHandlerException;
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import es.unileon.domain.Employee;
-import es.unileon.domain.Handler;
-import es.unileon.domain.DNIHandler;
+import es.unileon.domain.MalformedHandlerException;
 import es.unileon.domain.Office;
-import es.unileon.domain.OfficeHandler;
 
-
-/**
- * @author Pedro
- *
- */
 public class OfficeTest {
 
-    Office testOffice;
-    Office anotherTestOffice;
-    Handler idTestOffice;
-    Handler anotherIdOffice;
-    Employee oneEmployee;
-    DNIHandler dni;
-    ArrayList<Employee> employeeTestList;
+	   Office testOffice;
+	   Office anotherTestOffice;
 
-    int testExpenses;
-    int totalExpenses;
-    int totalIncome;
-    
-    
+	   String description;
+	   String address;
+	   String city;
+	   int testExpenses;
+	   int totalExpenses;
+	   int totalIncome;
+	    
 
-    @Before
-    public void setUp() throws MalformedHandlerException {
-        dni = new DNIHandler("36167364W");
-        idTestOffice = new OfficeHandler(1234);
-        oneEmployee = new Employee("name", "surname", "address", 0, dni);
+	    @Before
+	    public void setUp() throws MalformedHandlerException {
+	    testExpenses = 1000;
+	    totalExpenses = 3000;
+	    totalIncome = 1000;
+	    description = "Office1";
+	    city = "Leon";
+	    address = "Calle 123";
+	    testOffice = new Office(description, city, address);
+	    }
+	@Test
+	public void testGetDescription() {
+		String testDesc = "Office1";
+		assertTrue(testOffice.getDescription() == testDesc);
+	}
 
+	@Test
+	public void testGetciudad() {
+		String testCit = "Leon";
+		assertTrue(testOffice.getCiudad() == testCit);
+	}
 
-//        testAccount = new CommercialAccountAccount();
+	@Test
+	public void testSetCiudad() {
+		String testCit = "Leon";
+		String testCit2 = "Madrid";
+		assertTrue(testOffice.getCiudad() == testCit);
+		this.testOffice.setCiudad(testCit2);
+		assertTrue(testOffice.getCiudad() == testCit2);
+	}
 
-  
+	@Test
+	public void testSetDescription() {
+		String testDesc = "Office1";
+		String testDesc2 = "Office3";
+		assertTrue(testOffice.getDescription() == testDesc);
+		this.testOffice.setDescription(testDesc2);
+		assertTrue(testOffice.getDescription() == testDesc2);
+	}
 
-        testExpenses = 1000;
-        totalExpenses = 3000;
-        totalIncome = 1000;
+	@Test
+	public void testGetAddress() {
+		String testAddress = "Calle 123";
+		assertTrue(testOffice.getAddress() == testAddress);
+	}
 
-        testOffice.setExpenses(testExpenses, testExpenses, testExpenses);
-    }
-
-    @Test
-    public void testGetIdOffice() {
-        Handler expected = idTestOffice;
-        Handler result = testOffice.getIdOffice();
-        assertEquals(expected, result);
-
-    }
-
-    @Test
-    public void testSetIdOffice() throws MalformedHandlerException {
-        Handler idOffice = new OfficeHandler(5995);
-        
-//        testOffice.setIdOffice(idOffice); --> método no existente
-        fail("Need to fix the method");
-
-        Handler result = testOffice.getIdOffice();
-        assertEquals(idOffice, result);
-    }
-
-    @Test
-    public void testGetExpenses() {
-        assertTrue(testOffice.getExpenses() == totalExpenses);
-    }
-
-    @Test
-    public void testSetExpenses() {
-        int newTestExpenses = 3000;
-        int newTotalExenses = 9000;
-        testOffice.setExpenses(newTestExpenses, newTestExpenses, newTestExpenses);
-
-        assertTrue(newTotalExenses == testOffice.getExpenses());
-    }
-
-    @Test
-    public void testGetTotalIncome() {
-        testOffice.setTotalIncome(totalIncome);
-        int result = testOffice.getTotalIncome();
-        int expected = totalIncome;
-
-        assertEquals(result, expected);
-    }
-
-    @Test
-    public void testSetTotalIncome() {
-        int testIncome = 3000;
-        testOffice.setTotalIncome(totalIncome);
-        int result = testOffice.getTotalIncome();
-        int expected = totalIncome;
-
-        assertEquals(result, expected);
-
-        testOffice.setTotalIncome(testIncome);
-        result = testOffice.getTotalIncome();
-
-        assertTrue(result!=expected);
-
-    }
-
-    @Test
-    public void testGetEmployeeList() {
-        testOffice.setEmployeeList(employeeTestList);
-        ArrayList<Employee> result = testOffice.getEmployeeList();
-        ArrayList<Employee> expected = employeeTestList;
-
-        assertEquals(result, expected);
-    }
-
-    @Test
-    public void testSetEmployeeList() {
-        testOffice.setEmployeeList(employeeTestList);
-        ArrayList<Employee> result = testOffice.getEmployeeList();
-        ArrayList<Employee> expected = employeeTestList;
-
-        assertEquals(result, expected);
-
-    }
+	@Test
+	public void testSetAddress() {
+		String testAddress = "Calle 123";
+		String testAddress2 = "Calle 321";
+		assertTrue(testOffice.getAddress() == testAddress);
+		this.testOffice.setAddress(testAddress2);
+		assertTrue(testOffice.getAddress() == testAddress2);
+	}
 
 
-    @Test
-    public void testAddEmployee() {
-        testOffice.setEmployeeList(employeeTestList);
-        testOffice.addEmployee(oneEmployee);
 
-        Employee result = employeeTestList.get(0);
-        Employee expected = oneEmployee;
-
-        assertEquals(result, expected);
-
-    }
-
-    @Test
-    public void testDeleteEmployee() {
-        testOffice.setEmployeeList(employeeTestList);
-        testOffice.addEmployee(oneEmployee);
-
-        Employee result = employeeTestList.get(0);
-        Employee expected = oneEmployee;
-
-        assertEquals(result, expected);
-
-        testOffice.deleteEmployee(oneEmployee);
-        assertTrue(employeeTestList.isEmpty());
-    }
-
-
+	
 
 }

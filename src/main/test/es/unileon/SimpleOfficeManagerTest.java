@@ -9,9 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import es.unileon.domain.Office;
+import es.unileon.repository.InMemoryOfficeDao;
+import es.unileon.repository.OfficeDao;
 import es.unileon.service.SimpleOfficeManager;
 
-public class SimpleProductManagerTest {
+public class SimpleOfficeManagerTest {
 
     private SimpleOfficeManager productManager;
     
@@ -35,14 +37,17 @@ public class SimpleProductManagerTest {
         product.setAddress(ADDRESS);
         office.add(product);
         
+        OfficeDao officeDao = new InMemoryOfficeDao(office);
+        productManager.setOfficeDao(officeDao);
         
-        productManager.setOffices(office);
+     //   productManager.setOffices(office);
 
     }
 
     @Test
     public void testGetOfficesWithNoOffices() {
         productManager = new SimpleOfficeManager();
+        productManager.setOfficeDao(new InMemoryOfficeDao(null));
         assertNull(productManager.getOffices());
     }
 
@@ -63,10 +68,11 @@ public class SimpleProductManagerTest {
     public void testChangeAddressWithNullListOfOffices() {
         try {
             productManager = new SimpleOfficeManager();
+            productManager.setOfficeDao(new InMemoryOfficeDao(null));
             productManager.addressChange(ADDRESS);
         }
         catch(NullPointerException ex) {
-            fail("Products list is null.");
+            fail("Office list is null.");
         }
     }
 
@@ -74,11 +80,11 @@ public class SimpleProductManagerTest {
     public void testChangeAddressWithEmptyListOfOffices() {
         try {
             productManager = new SimpleOfficeManager();
-            productManager.setOffices(new ArrayList<Office>());
+            productManager.setOfficeDao(new InMemoryOfficeDao(new ArrayList<Office>()));
             productManager.addressChange(ADDRESS);
         }
         catch(Exception ex) {
-            fail("Products list is empty.");
+            fail("Offices list is empty.");
         }           
     }
     

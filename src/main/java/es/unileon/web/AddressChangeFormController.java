@@ -48,11 +48,11 @@ public class AddressChangeFormController {
         return addressChange;
     }
 
-    public void setProductManager(OfficeManager productManager) {
+    public void setOfficeManager(OfficeManager productManager) {
         this.productManager = productManager;
     }
 
-    public OfficeManager getProductManager() {
+    public OfficeManager getOfficeManager() {
         return productManager;
     }
 

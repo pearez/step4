@@ -4,27 +4,35 @@ package es.unileon.service;
 import java.util.List;
 
 import es.unileon.domain.Office;
+import es.unileon.repository.OfficeDao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+
+@Component
 public class SimpleOfficeManager implements OfficeManager {
 
     private static final long serialVersionUID = 1L;
 
-    private List<Office> offices;
+    @Autowired
+    private OfficeDao officeDao;
 
+    public void setOfficeDao(OfficeDao officeDao) {
+        this.officeDao = officeDao;
+    }
     public List<Office> getOffices() {
-        return offices; 
+    	return officeDao.getOfficeList();
     }
 
     public void addressChange(String address) {
+    	List<Office> offices = officeDao.getOfficeList();
         if (offices != null) {
-            for (Office product : offices) {
+            for (Office offi : offices) {
                 String newAddress =  address;
-                product.setAddress(newAddress);
+                offi.setAddress(newAddress);
+                officeDao.saveOffice(offi);;
             }
         }  
-    }
-	
-    public void setOffices(List<Office> office) {
-        this.offices = office;
     }
 }
