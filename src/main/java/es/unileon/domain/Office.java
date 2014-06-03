@@ -17,13 +17,9 @@ public class Office implements Serializable {
 	private static final long serialVersionUID = 1L;
 
     private int totalExpenses;
-    /**
-     * The total balance of the office
-     */
+    
     private int balance;
-    /**
-     * The list of employees of this office
-     */
+    
     @Id
     @Column(name = "description")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,9 +63,7 @@ public class Office implements Serializable {
         return totalExpenses;
     }
 
-    /**
-     * Returns the balance of the office
-     */
+   
     public int getBalance() {
         return balance;
     }
